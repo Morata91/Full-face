@@ -1,99 +1,97 @@
 # Full-face
-The Pytorch Implementation of "It’s written all over your face: Full-face appearance-based gaze estimation". (updated in 2021/04/28)
+「It’s written all over your face: Full-face appearance-based gaze estimation」のPytorch実装（2021年4月28日更新）
 
-We build benchmarks for gaze estimation in our survey [**"Appearance-based Gaze Estimation With Deep Learning: A Review and Benchmark"**](https://arxiv.org/abs/2104.12668).
-This is the implemented code of the "Full-face" method in our benchmark. Please refer our survey for more details.
+私たちは、調査論文[**「Appearance-based Gaze Estimation With Deep Learning: A Review and Benchmark」**](https://arxiv.org/abs/2104.12668)で、注視推定のためのベンチマークを構築しました。これは、ベンチマーク内の「Full-face」メソッドの実装コードです。詳細については、調査論文を参照してください。
 
-We recommend you to use **data processing codes** provided in <a href="http://phi-ai.org/GazeHub/" target="_blank">*GazeHub*</a>.
-You can direct run the method' code using the processed dataset.
+**データ処理コード**を<a href="http://phi-ai.org/GazeHub/" target="_blank">*GazeHub*</a>で使用することをお勧めします。
+処理済みデータセットを使用して直接メソッドのコードを実行できます。
 
-## Links to gaze estimation codes.
+## 注視推定コードへのリンク
 
-- A Coarse-to-fine Adaptive Network for Appearance-based Gaze Estimation, AAAI 2020 (Coming soon)
-- [Gaze360: Physically Unconstrained Gaze Estimation in the Wild](https://github.com/yihuacheng/Gaze360), ICCV 2019
-- [Appearance-Based Gaze Estimation Using Dilated-Convolutions](https://github.com/yihuacheng/Dilated-Net), ACCV 2019
-- [Appearance-Based Gaze Estimation via Evaluation-Guided Asymmetric Regression](https://github.com/yihuacheng/ARE-GazeEstimation), ECCV 2018
-- [RT-GENE: Real-Time Eye Gaze Estimation in Natural Environments](https://github.com/yihuacheng/RT-Gene), ECCV 2018
-- [MPIIGaze: Real-World Dataset and Deep Appearance-Based Gaze Estimation](https://github.com/yihuacheng/Gaze-Net), TPAMI 2017
-- [It’s written all over your face: Full-face appearance-based gaze estimation](https://github.com/yihuacheng/Full-face), CVPRW 2017
-- [Eye Tracking for Everyone](https://github.com/yihuacheng/Itracker), CVPR 2016
-- [Appearance-Based Gaze Estimation in the Wild](https://github.com/yihuacheng/Mnist), CVPR 2015
+- 外観ベースの注視推定のための粗密適応ネットワーク, AAAI 2020 (近日公開)
+- [Gaze360: 野外での物理的に制約のない注視推定](https://github.com/yihuacheng/Gaze360), ICCV 2019
+- [膨張畳み込みを使用した外観ベースの注視推定](https://github.com/yihuacheng/Dilated-Net), ACCV 2019
+- [評価ガイド付き非対称回帰による外観ベースの注視推定](https://github.com/yihuacheng/ARE-GazeEstimation), ECCV 2018
+- [自然環境でのリアルタイム目の注視推定](https://github.com/yihuacheng/RT-Gene), ECCV 2018
+- [MPIIGaze: 実世界データセットと深層外観ベースの注視推定](https://github.com/yihuacheng/Gaze-Net), TPAMI 2017
+- [それはあなたの顔にすべて書かれています: Full-face appearance-based gaze estimation](https://github.com/yihuacheng/Full-face), CVPRW 2017
+- [誰にでも使える目の追跡](https://github.com/yihuacheng/Itracker), CVPR 2016
+- [野外での外観ベースの注視推定](https://github.com/yihuacheng/Mnist), CVPR 2015
 
-## Performance
-The method is evaluated in three tasks. Please refer our survey for more details.
-![benchmarks](benchmarkA.png)
-![benchmarks](benchmarkB.png)
+## パフォーマンス
+この方法は3つのタスクで評価されます。詳細については調査論文を参照してください。
+![ベンチマーク](benchmarkA.png)
+![ベンチマーク](benchmarkB.png)
 
-## License
-The code is under the license of [CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+## ライセンス
+コードは[CC BY-NC-SA 4.0ライセンス](https://creativecommons.org/licenses/by-nc-sa/4.0/)の下で提供されています。
 
 
-## Introduction
-We provide two projects for leave-one-person-out evaluation and the evaluation of common training-test split.
-They have the same architecture but different `train.py` and `test.py`.
+## イントロダクション
+私たちは、leave-one-person-out評価と一般的なトレーニング-テストスプリットの評価のための2つのプロジェクトを提供します。
+それらは同じアーキテクチャを持ちますが、`train.py`と`test.py`が異なります。
 
-Each project contains following files/folders.
-- `model.py`, the model code.
-- `train.py`, the entry for training.
-- `test.py`, the entry for testing.
-- `config/`, this folder contains the config of experiments for each dataset. To run our code, **you should write your own** `config.yaml`. 
-- `reader/`, the data loader code. You can use the provided reader or write your own reader.
+各プロジェクトには次のファイル/フォルダーが含まれています。
+- `model.py`: モデルコード。
+- `train.py`: トレーニングのエントリーポイント。
+- `test.py`: テストのエントリーポイント。
+- `config/`: 各データセットの実験設定が含まれます。コードを実行するには、**独自の** `config.yaml`を書いてください。
+- `reader/`: データローダーコード。提供されたリーダーを使用するか、自分でリーダーを作成できます。
 
-## Getting Started
-### Writing your own *config.yaml*
+## はじめに
+### 独自の*config.yaml*を書く
 
-Normally, for training, you should change 
-1. `train.save.save_path`, The model is saved in the `$save_path$/checkpoint/`.
-2. `train.data.image`, This is the path of image, please use the provided data processing code in <a href="http://phi-ai.org/GazeHub/" target="_blank">*GazeHub*</a>.
-3. `train.data.label`, This is the path of label.
-4. `reader`, This indicates the used reader. It is the filename in `reader` folder, e.g., *reader/reader_mpii.py* ==> `reader: reader_mpii`.
+通常、トレーニング用には次の変更が必要です。
+1. `train.save.save_path`: モデルは`$save_path$/checkpoint/`に保存されます。
+2. `train.data.image`: 画像のパスです。提供されたデータ処理コードを使用してください。<a href="http://phi-ai.org/GazeHub/" target="_blank">*GazeHub*</a>。
+3. `train.data.label`: ラベルのパスです。
+4. `reader`: 使用するリーダーを示します。`reader`フォルダー内のファイル名です。例: *reader/reader_mpii.py* ==> `reader: reader_mpii`。
 
-For test, you should change 
-1. `test.load.load_path`, it is usually the same as `train.save.save_path`. The test result is saved in `$load_path$/evaluation/`.
-2. `test.data.image`, it is usually the same as `train.data.image`.
-3. `test.data.label`, it is usually the same as `train.data.label`.
- 
-### Training
+テスト用には次の変更が必要です。
+1. `test.load.load_path`: 通常は`train.save.save_path`と同じです。テスト結果は`$load_path$/evaluation/`に保存されます。
+2. `test.data.image`: 通常は`train.data.image`と同じです。
+3. `test.data.label`: 通常は`train.data.label`と同じです。
 
-In the leaveout folder, you can run
+### トレーニング
+
+leaveoutフォルダーで次のように実行できます。
 ```
 python train.py config/config_mpii.yaml 0
 ```
-This means the code will run with `config_mpii.yaml` and use the `0th` person as the test set.
+これは、`config_mpii.yaml`を使用し、`0番目`の人物をテストセットとして使用することを意味します。
 
-You also can run
+また、次のように実行できます。
 ```
 bash run.sh train.py config/config_mpii.yaml
 ```
-This means the code will perform leave-one-person-out training automatically.   
-`run.sh` performs iteration, you can change the iteration times in `run.sh` for different datasets, e.g., set the iteration times as `4` for four-fold validation.
+これは、leave-one-person-outトレーニングを自動的に実行することを意味します。`run.sh`はイテレーションを実行します。異なるデータセットのために`run.sh`のイテレーション回数を変更できます。例: 四重検証のためにイテレーション回数を`4`に設定します。
 
-In the traintest folder, you can run
+traintestフォルダーで次のように実行できます。
 ```
 python train.py config/config_mpii.yaml
 ```
 
-### Test
-In the leaveout folder, you can run
+### テスト
+leaveoutフォルダーで次のように実行できます。
 ```
 python test.py config/config_mpii.yaml 0
 ```
-or
+または
 ```
 bash run.sh test.py config/config_mpii.yaml
 ```
 
-In the traintest folder, you can run
+traintestフォルダーで次のように実行できます。
 ```
 python test.py config/config_mpii.yaml
 ```
 
-### Result
-After training or test, you can find the result from the `$save_path$` in `config_mpii.yaml`. 
+### 結果
+トレーニングまたはテスト後、結果は`config_mpii.yaml`の`$save_path$`から見つけることができます。
 
 
-## Citation
-If you use our code, please cite:
+## 引用
+私たちのコードを使用する場合は、以下を引用してください。
 ```
 @inproceedings{Zhang_2017_CVPRW,
 	title={It’s written all over your face: Full-face appearance-based gaze estimation},
@@ -112,23 +110,23 @@ If you use our code, please cite:
         year={2021}
 }
 ```
-## Contact 
-Please email any questions or comments to yihua_c@buaa.edu.cn.
+## 連絡先
+質問やコメントがある場合は、yihua_c@buaa.edu.cnまでメールしてください。
 
 
-## Reference
+## 参考文献
 
-1. MPIIGaze: Real-World Dataset and Deep Appearance-Based Gaze Estimation
-2. EYEDIAP Database: Data Description and Gaze Tracking  Evaluation Benchmarks
-3. Learning-by-Synthesis for Appearance-based 3D Gaze Estimation
-3. Gaze360: Physically Unconstrained Gaze Estimation in the Wild
-5. ETH-XGaze: A Large Scale Dataset for Gaze Estimation under Extreme Head Pose and Gaze Variation
-6. Appearance-Based Gaze Estimation in the Wild  
-7. Appearance-Based Gaze Estimation Using Dilated-Convolutions
-8. RT-GENE: Real-Time Eye Gaze Estimation in Natural Environments
-9. It’s written all over your face: Full-face appearance-based gaze estimation
-10. A Coarse-to-fine Adaptive Network for Appearance-based Gaze Estimation
-11. Eye Tracking for Everyone
-12. Adaptive Feature Fusion Network for Gaze Tracking in Mobile Tablets
-13. On-Device Few-Shot Personalization for Real-Time Gaze Estimation
-14. A Generalized and Robust Method Towards Practical Gaze Estimation on Smart Phone
+1. MPIIGaze: 実世界データセットと深層外観ベースの注視推定
+2. EYEDIAPデータベース: データ記述と注視追跡評価ベンチマーク
+3. 合成による学習：外観ベースの3D注視推定
+3. Gaze360: 野外での物理的に制約のない注視推定
+5. ETH-XGaze: 極端な頭の向きと注視変動下での大規模データセット
+6. 野外での外観ベースの注視推定  
+7. 膨張畳み込みを使用した外観ベースの注視推定
+8. 自然環境でのリアルタイム目の注視推定
+9. それはあなたの顔にすべて書かれています: Full-face appearance-based gaze estimation
+10. 粗密適応ネットワークによる外観ベースの注視推定
+11. 誰にでも使える目の追跡
+12. モバイルタブレットでの注視追跡のための適応機能融合ネットワーク
+13. スマートフォンでの実用的な注視推定に向けた一般化されたロバストな方法
+14. スマートフォン上でのリアルタイム注視推定のためのオンデバイス少量個人化
